@@ -1,0 +1,224 @@
+create table temp_table(id number(4) primary key, first_name varchar(50), last_name varchar(50));
+
+insert into temp_table values(1,'sam','s');
+insert into temp_table values(2,'sam1','s1');
+insert into temp_table values(3,'sam2','s2');
+insert into temp_table values(4,'sam3','s3');
+insert into temp_table values(5,'sam','s');
+insert into temp_table values(6,'sam1','s1');
+insert into temp_table values(7,'sam2','s2');
+insert into temp_table values(8,'sam3','s3');
+insert into temp_table values(9,'sam','s');
+insert into temp_table values(10,'sam1','s1');
+insert into temp_table values(11,'sam2','s2');
+insert into temp_table values(12,'sam3','s3');
+
+alter table temp_table add country varchar(20);
+
+alter table temp_table drop column country;
+
+truncate table temp_table;
+
+drop table temp_table;
+
+select * from temp_table;
+
+create table temp2(id number(10),first_name varchar(20),last_name varchar(20), constraint fn_key primary key(id));
+create table temp3(stud_id number(20),depart_name varchar(20), constraint get_key foreign key(stud_id) references temp2(id));
+
+create table temp4(id number(4) primary key, first_name varchar(50), last_name varchar(50));
+
+insert into temp4 select * from temp_table;
+
+insert into temp4(id,first_name,last_name) values(5,'billy','b');
+insert into temp4(id,first_name) values (6,'kent');
+
+create table temp5(id number(10) primary key,first_name varchar(50),last_name varchar(50));
+
+insert into temp5 select * from temp_table where id>2;
+
+create table temp6(id number(11) primary key, first_name varchar(50), last_name varchar(50));
+
+insert into temp6 select * from temp_table where id between 2 and 4;
+
+create table temp7(id number(10) primary key, fisrt_name varchar(50), last_name varchar(50));
+
+insert into temp7 select id,first_name,last_name from temp_table where id between 1 and 3;
+
+create table temp8(id number(10) primary key, holidays varchar(20), holi_date date);
+
+insert into temp8(id,holidays,holi_date) values(1,'Wednesday',To_Date('27-12-1997','DD-MM-YYYY'));
+insert into temp8(id,holidays,holi_date) values(2,'Wednesday',To_Date('27-12-1997','DD-mm-YYYY'));
+
+select * from countries;
+select * from departments;
+select * from employees;
+select * from job_history;
+select * from jobs;
+
+select sum(salary) from employees;
+select avg(salary) from employees;
+select max(salary) from employees;
+select min(salary) from employees;
+select count(*) from employees;
+
+select * from employees;
+
+select department_id from employees group by department_id;
+
+select department_id from employees where department_id=40;
+
+select department_id,max(salary) from employees group by department_id;
+select department_id,count(*) from employees group by department_id;
+
+select job_id from employees group by job_id;
+
+select first_name from employees group by first_name;
+
+select job_id from employees where job_id = 'AC_ACCOUNT';
+
+select manager_id from employees group by manager_id;
+
+select department_id,max(salary),min(salary),sum(salary),avg(salary) from employees group by department_id;
+
+select job_id,max(salary),min(salary),sum(salary),avg(salary) from employees group by job_id;
+
+select abs(-1),abs(1),abs(7),abs(19) from dual;
+
+select department_id from employees group by department_id order by department_id;
+
+select round(123.456,2),round(123.456,1) from dual;
+select trunc(123.456,2),trunc(123.456,1) from dual;
+
+select round(123.456789,4) from dual;
+select trunc(123.456789,4) from dual;
+select round(123.4512,3) from dual;
+select round(123.4186,3) from dual;
+select round(123.4567,-2) from dual;
+select round(123.4156,-2) from dual;
+select round(234.2234,-1) from dual;
+select trunc(234.445,-2) from dual;
+select trunc(234.665,-1) from dual;
+select trunc(234.887,-3) from dual;
+select round(-234.887,-2) from dual;
+select round(151.45,-2) from dual;
+select round(1151.23,-3) from dual;
+select round(123.45,-1) from dual;
+select round(178.22,-1) from dual;
+select round(123.456789,70)from dual;
+select trunc(123.456789,70) from dual;
+
+select ceil(43.45) from dual;
+select floor(4.9) from dual;
+
+select * from employees;
+
+select distinct department_id from employees;
+select distinct departmetn_id,max(salary) from employees;
+
+select * from employees;
+
+select * from temp_table;
+
+update temp_table set first_name='alpha';
+update temp_table set first_name='beta' where id=2;
+
+delete from temp_table where id=3; 
+delete from temp_table;
+truncate table temp_table;
+
+select * from employees;
+select * from employees where employee_id=101;
+select * from employees where employee_id between 101 and 120;
+select * from employees where employee_id between 101 and 120 and job_id='AD_VP';
+select department_id from employees group by department_id;
+select department_id,count(*) from employees group by department_id;
+select department_id,count(*),sum(salary),avg(salary) from employees where employee_id between 101 and 120 group by department_id;
+select department_id,count(*) from employees group by department_id having count(*)>5;
+select department_id from employees group by department_id having department_id > 50;
+
+create table student_details(stud_id number(10),first_name varchar(20),fees_amt number(20),dob date,depart_id number(5));
+insert into student_details values(1,'A',20000,To_Date('21-12-1997','DD-MM-YYYY'),10);
+insert into student_details values(2,'B',22000,To_Date('27-12-1997','DD-MM-YYYY'),20);
+insert into student_details values(3,'C',20000,To_Date('24-12-1997','DD-MM-YYYY'),10);
+insert into student_details values(4,'D',25000,To_Date('26-12-1997','DD-MM-YYYY'),20);
+insert into student_details values(5,'E',21000,To_Date('29-12-1997','DD-MM-YYYY'),40);
+insert into student_details values(6,'F',24000,To_Date('30-12-1997','DD-MM-YYYY'),60);
+
+create table depart_details(depart_id number(5),depart_name varchar(20),hod_id number(5));
+insert into depart_details values(10,'AD',101);
+insert into depart_details values(20,'BD',102);
+insert into depart_details values(30,'CD',103);
+insert into depart_details values(40,'DD',104);
+insert into depart_details values(50,'ED',105);
+
+create table hod_details(hod_id number(5),hod_name varchar(20));
+insert into hod_details values(101,'HOD1');
+insert into hod_details values(102,'HOD2');
+insert into hod_details values(103,'HOD3');
+insert into hod_details values(104,'HOD4');
+insert into hod_details values(105,'HOD5');
+
+select * from student_details;
+select * from depart_details;
+select * from hod_details;
+
+select * from student_details inner join depart_details on student_details.depart_id = depart_details.depart_id
+    inner join hod_details on depart_details.hod_id = hod_details.hod_id;
+                    
+select a.*,b.depart_name,b.hod_id,c.hod_name from student_details a
+    inner join depart_details b on a.depart_id = b.depart_id
+    inner join hod_details c on b.hod_id = c.hod_id;
+    
+select * from student_details a inner join depart_details b on a.depart_id = b.depart_id
+    inner join hod_details c on b.hod_id = c.hod_id;
+                              
+select * from student_details a left join depart_details b on a.depart_id = b.depart_id
+    left join hod_details c on b.hod_id = c.hod_id;
+
+select * from student_details a right join depart_details b on a.depart_id = b.depart_id
+    right join hod_details c on b.hod_id = c.hod_id;
+    
+select * from student_details a full join depart_details b on a.depart_id = b.depart_id
+    full join hod_details c on b.hod_id = c.hod_id;
+    
+select * from student_details cross join depart_details cross join hod_details;
+    
+select * from employees;
+select * from departments;
+select * from locations;
+select * from countries;
+
+select * from employees a inner join departments b on a.department_id = b.department_id
+inner join locations c on b.location_id = c.location_id
+inner join countries d on c.country_id = d.country_id;
+
+select a.*,b.department_name,c.city,d.country_name from employees a inner join departments b on a.department_id = b.department_id
+inner join locations c on b.location_id = c.location_id
+inner join countries d on c.country_id = d.country_id;
+
+select A.*,B.* from ( select employee_id,first_name,last_name,salary,department_id from employees)A
+inner join (select department_id,department_name,location_id from departments)B on A.department_id = B.department_id;
+
+////-------------error////////
+
+select AB.*,C.* from (select A.*,B.* from 
+(select employee_id,first_name,last_name,salary,department_id from employees)A 
+inner join 
+(select department_id,department_name,location_id from departments)B on A.department_id = B.department_id)AB 
+inner join 
+(select location_id,postal_code,city from locations)C 
+on AB.location_id = C.location_id;
+
+
+/////////----------------error//////////
+
+select AB.*,C.city from (select A.*,B.department_name,b.location_id from 
+(select employee_id,first_name,last_name,salary,department_id from employees)A 
+inner join 
+(select department_id,department_name,location_id from departments)B on A.department_id = B.department_id)AB 
+inner join 
+(select location_id,postal_code,city from locations)C 
+on AB.location_id = C.location_id;
+
+
